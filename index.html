@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3DCATIADESIGN</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--accent:#00C2FF;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#05070d;
+color:white;
+}
+
+/* LOADER */
+.loader{
+position:fixed;
+width:100%;
+height:100%;
+background:#05070d;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+.loader span{
+width:50px;
+height:50px;
+border:4px solid transparent;
+border-top:4px solid var(--accent);
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+@keyframes spin{100%{transform:rotate(360deg);}}
+
+/* NAVBAR */
+header{
+position:fixed;
+width:100%;
+top:0;
+padding:20px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(12px);
+z-index:1000;
+}
+
+.logo{
+font-weight:700;
+}
+
+nav ul{
+display:flex;
+gap:30px;
+list-style:none;
+}
+
+nav a{
+color:#ccc;
+text-decoration:none;
+}
+
+nav a:hover{
+color:var(--accent);
+}
+
+/* HERO */
+.hero{
+height:100vh;
+background:
+linear-gradient(rgba(5,7,13,0.85), rgba(5,7,13,0.95)),
+url('images/hero.png');
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.hero h1{
+font-size:48px;
+max-width: 900px;
+margin: 0 auto 20px auto;
+}
+
+.hero p{
+opacity:0.8;
+max-width:700px;
+margin:auto;
+}
+
+.hero-features {
+opacity:0.8; 
+max-width:600px; 
+margin: 20px auto;
+font-weight: 300;
+}
+
+.btn{
+margin-top:20px;
+padding:15px 40px;
+background:linear-gradient(90deg,#00C2FF,#007CF0);
+border-radius:30px;
+display:inline-block;
+cursor:pointer;
+}
+
+/* STATS */
+.stats{
+display:flex;
+justify-content:center;
+gap:60px;
+margin-top:40px;
+flex-wrap:wrap;
+}
+
+.stat h2{
+color:var(--accent);
+}
+
+/* SECTIONS */
+section{
+padding:100px 60px;
+}
+
+.section-title {
+text-align:center;
+margin-bottom: 20px;
+font-size: 32px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.card{
+padding:30px;
+border-radius:15px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.1);
+transition:.4s;
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.card h3 {
+color: var(--accent);
+}
+
+.card:hover{
+transform:translateY(-10px);
+border-color:var(--accent);
+}
+
+/* FORM */
+.form-section{
+text-align:center;
+background:linear-gradient(90deg,#001f3f,#003366);
+padding:120px 20px;
+}
+
+.form{
+max-width:500px;
+margin:40px auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.form input,
+.form textarea,
+.form select{
+padding:15px;
+border:none;
+border-radius:8px;
+background:#0f1624;
+color:white;
+}
+
+.form button{
+padding:15px;
+background:var(--accent);
+border:none;
+border-radius:30px;
+cursor:pointer;
+color: #000;
+font-weight: 600;
+}
+
+/* FOOTER */
+footer{
+padding:60px;
+text-align:center;
+background:#02040a;
+}
+
+.socials a{
+margin:0 10px;
+font-size:20px;
+color:var(--accent);
+text-decoration:none;
+}
+
+/* WHATSAPP PREMIUM */
+.whatsapp{
+position:fixed;
+bottom:25px;
+right:25px;
+background:#25D366;
+padding:18px;
+border-radius:50%;
+color:white;
+font-size:24px;
+text-decoration:none;
+animation:pulse 2s infinite;
+z-index: 1000;
+}
+
+@keyframes pulse{
+0%{box-shadow:0 0 0 0 rgba(37,211,102,0.7);}
+70%{box-shadow:0 0 0 20px rgba(37,211,102,0);}
+100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}
+}
+
+/* ANIM */
+.fade{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+  header { padding: 20px; flex-direction: column; gap: 15px; }
+  .hero h1 { font-size: 32px; }
+  section { padding: 60px 20px; }
+  .stats { gap: 30px; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="loader"><span></span></div>
+
+<header>
+<div class="logo">3DCATIADESIGN</div>
+<nav>
+<ul>
+<li><a href="#">Ana Sayfa</a></li>
+<li><a href="#services">Hizmetler</a></li>
+<li><a href="#projects">Projeler</a></li>
+<li><a href="#form" style="color:#00C2FF;font-weight:600;">Teklif Al</a></li>
+<li><a href="#contact">İletişim</a></li>
+</ul>
+</nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<div>
+<h1>Fikrinizi Üretime Hazır Mühendisliğe Dönüştürüyoruz</h1>
+<p>
+CATIA, SolidWorks ve ileri mühendislik analizleri ile 
+savunma sanayi seviyesinde tasarım, Ar-Ge ve tahribatsız muayene çözümleri sunuyoruz.
+</p>
+
+<p class="hero-features">
+✔ 24 saat içinde geri dönüş &nbsp;&nbsp;
+✔ Ücretsiz ön değerlendirme &nbsp;&nbsp;
+✔ %100 gizlilik garantisi  
+</p>
+
+<div class="btn" onclick="scrollToForm()">Teklif Al</div>
+
+<div class="stats">
+<div class="stat"><h2>+120</h2><p>Proje</p></div>
+<div class="stat"><h2>+40</h2><p>Müşteri</p></div>
+<div class="stat"><h2>10+</h2><p>Yıl</p></div>
+</div>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+<h2 class="section-title">Uzmanlık Alanlarımız</h2>
+
+<div class="grid">
+<div class="card fade"><h3>3D CATIA Tasarım</h3></div>
+<div class="card fade"><h3>Ar-Ge & Ürün Geliştirme</h3></div>
+<div class="card fade"><h3>NDT Testleri</h3></div>
+<div class="card fade"><h3>FEA Analiz</h3></div>
+</div>
+</section>
+
+<!-- ORNEK PROJELER -->
+<section id="projects">
+<h2 class="section-title">Örnek Projeler</h2>
+
+<div class="grid">
+<div class="card fade">
+<img src="/mnt/data/6cc387b0-c627-441b-b965-c797623da51e.png" alt="3D Mekanik Sistem" style="width:100%; border-radius:10px;">
+<h3>3D Mekanik Sistem</h3>
+<p>Yüksek hassasiyetli CATIA yüzey modelleme</p>
+</div>
+
+<div class="card fade">
+<img src="/mnt/data/6cc387b0-c627-441b-b965-c797623da51e.png" alt="Endüstriyel Tasarım" style="width:100%; border-radius:10px;">
+<h3>Endüstriyel Tasarım</h3>
+<p>Üretime uygun mühendislik çözümleri</p>
+</div>
+
+<div class="card fade">
+<img src="images/project1.png">
+<h3>Analiz & Simülasyon</h3>
+<p>FEA destekli performans doğrulama</p>
+</div>
+</div>
+</section>
+
+<!-- REFERANS & GUVEN -->
+<section id="trust">
+<h2 class="section-title">Referans & Güven</h2>
+
+<div class="grid">
+<div class="card fade">
+<h3>✔ Savunma Sanayi Standartları</h3>
+<p>Projelerimiz yüksek hassasiyet ve kalite gereksinimlerine uygun şekilde geliştirilir.</p>
+</div>
+
+<div class="card fade">
+<h3>✔ Üretime Hazır Tasarımlar</h3>
+<p>Tüm modeller üretilebilirlik ve maliyet optimizasyonu göz önünde bulundurularak hazırlanır.</p>
+</div>
+
+<div class="card fade">
+<h3>✔ Gizlilik & Profesyonellik</h3>
+<p>Tüm projeler NDA kapsamında korunur ve maksimum gizlilik ile yürütülür.</p>
+</div>
+</div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="form">
+<h2>Projenizi Başlatalım</h2>
+
+<form class="form">
+<input type="text" placeholder="Ad Soyad" required>
+<input type="email" placeholder="E-posta" required>
+<textarea placeholder="Projenizi anlatın" rows="4"></textarea>
+
+<select>
+<option>Bütçe Seçiniz</option>
+<option>10K - 50K</option>
+<option>50K - 150K</option>
+<option>150K+</option>
+</select>
+
+<button type="submit">Teklif Gönder</button>
+</form>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+<h2>İletişim</h2>
+<p>info@3dcatiadesign.com</p>
+
+<div class="socials">
+<a href="#">Instagram</a>
+<a href="#">X</a>
+</div>
+
+<p style="margin-top:20px;">© 2026 3DCATIADESIGN</p>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/9055222885518?text=Merhaba%20projem%20hakkında%20bilgi%20almak%20istiyorum" class="whatsapp">💬</a>
+
+<script>
+
+/* LOADER */
+window.addEventListener("load",()=>{
+document.querySelector(".loader").style.display="none";
+});
+
+/* SCROLL */
+function scrollToForm(){
+document.getElementById("form").scrollIntoView({behavior:"smooth"});
+}
+
+/* ANIM */
+const els=document.querySelectorAll('.fade');
+window.addEventListener('scroll',()=>{
+els.forEach(el=>{
+if(el.getBoundingClientRect().top < window.innerHeight-100){
+el.classList.add('show');
+}
+});
+});
+
+/* TRIGGER INITIAL ANIMATION CHECK */
+setTimeout(() => {
+  window.dispatchEvent(new Event('scroll'));
+}, 100);
+
+/* FORM */
+document.querySelector(".form").addEventListener("submit",function(e){
+e.preventDefault();
+
+const name=this.querySelector("input").value;
+const message=this.querySelector("textarea").value;
+const budget=this.querySelector("select").value;
+
+const text=`Merhaba, ben ${name}. Projem: ${message}. Bütçe: ${budget}`;
+
+window.open(`https://wa.me/XXXXXXXXXXXX?text=${encodeURIComponent(text)}`);
+});
+
+</script>
+
+</body>
+</html>
